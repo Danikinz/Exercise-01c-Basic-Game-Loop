@@ -5,9 +5,9 @@ assert sys.version_info >= (3,9), "This script requires at least Python 3.9"
 world = {
   "name": "Zork",
   "passages": [
-    {
+    { 
       "name": "West of House",
-      "links": [
+      "links": [ 
         {
           "linkText": "NORTH",
           "passageName": "North of House",
@@ -33,7 +33,24 @@ response = ""
 while True:
     if response == "quit":
         break
+
     # Find passage (update)
     current_location = {}
+    for passage in world["passages"]: 
+      #calls upon assigned values 'passage' in the given dict 
+      if passage["name"] == current:
+        current_location = passage 
+
     # Display passage (render the world)
+    print(current_location["name"])
+    print(current_location["cleanText"])
+    for link in current_location["links"]:
+      print(link["linkText"])
+
     # Ask for response (get input)
+    response = input("Where to next? ")
+    for link in current_location["links"]:
+      if response == link["linkText"]:
+        current = link["passageName"]
+
+
